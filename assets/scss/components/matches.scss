@@ -1,0 +1,102 @@
+.matches {
+  max-height: calc(100vh + 100px);
+  overflow-y: auto;
+  padding: 15px;
+  background: #13192F;
+  @media screen and (max-width: 1150px) {
+    max-height: unset!important;
+  }
+  .matches-row {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    padding: 15px 0;
+    cursor: pointer;
+    &:hover {
+      box-shadow: 0px 0px 5px 0px #393a58;
+      transition: all .5s ease;
+    }
+    .betting-status {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translate(0, -50%);
+      @media screen and (max-width: 700px) {
+        display: none;
+      }
+    }
+    .group {
+      border-radius: 50%;
+      background: transparent;
+      border: 1px solid #009bb4;
+      color: #009bb4;
+      justify-content: center;
+      font-weight: bold;
+      text-align: center;
+      font-size: 12px;
+      width: 40px;
+      height: 40px;
+      margin-left: 15px;
+    }
+    .group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @media screen and (max-width: 599px) {
+        display: none;
+      }
+    }
+    .main-content-matches {
+      display: flex;
+      justify-content: center;
+      width: calc(90% - 40px);
+      @media screen and (max-width: 700px) {
+        justify-content: flex-end;
+      }
+      @media screen and (max-width: 599px) {
+        justify-content: center;
+        width: 100%;
+      }
+    }
+    .home, .date, .away {
+      display: flex;
+      align-items: center;
+      img {
+        width: 30px;
+        margin: 0 20px;
+      }
+    }
+    .home {
+      flex-direction: row-reverse;
+      justify-content: flex-start;
+    }
+    .home, .away {
+      width: 200px;
+      @media screen and (max-width: 700px) {
+        width: 120px;
+      }
+    }
+    &:hover {
+      background: #1b2340;
+    }
+  }
+  .match-selected {
+    background: #1b2340;
+  }
+  .matches-table {
+    background: #13192F;
+  }
+  .collapse-match {
+    transform-origin: top;
+    transform: scale(1, 0.1);
+    opacity: 0;
+    height: 0;
+    transition: 200ms cubic-bezier(0.25, 0.8, 0.25, 1);
+    // transition: 200ms cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  .expand-match {
+    transform: scale(1, 1);
+    opacity: 1;
+    height: unset;
+  }
+}

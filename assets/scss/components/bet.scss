@@ -1,0 +1,38 @@
+.bet {
+  padding: 50px 25px;
+  @media screen and (max-width: 599px) {
+    padding: 50px 0;
+  }
+  .bet-content {
+    display: flex;
+    // box-shadow: 0px 0px 5px 0px #393a58;
+    border: 1px solid #393a58;
+    padding: 0;
+    max-width: 1264px;
+    margin: auto;
+    .bet-matches {
+      width: 60%;
+      background: #13192F;
+      border-right: 1px solid #393a58;
+    }
+    .bet-detail {
+      width: 40%;
+      background: #13192F;
+    }
+    @media screen and (max-width: 1150px) {
+      .bet-matches {
+        width: 100%;
+      }
+      .bet-detail {
+        width: 100%;
+      }
+      .nonex {
+        display: none;
+      }
+    }
+  }
+  .navigation-content {
+    background: #13192F;
+    height: 100%
+  }
+}

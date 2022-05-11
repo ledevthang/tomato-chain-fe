@@ -1,0 +1,40 @@
+.hiw {
+  // background: #2E2E2E;
+  .hiw-items {
+    margin-top: 50px;
+    .hiw-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      & > div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 40%;
+        padding: 20px 0;
+        .hiw-item__description-caption {
+          font-weight: 600;
+          font-size: 24px;
+          margin-bottom: 25px;
+        }
+        .hiw-item__description-details {
+          text-align: left;
+          font-weight: normal;
+          font-size: 16px;
+          color: #BDBDBD;
+          & > div {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            .v-icon {
+              margin-right: 15px
+            }
+          }
+        }
+      }
+    }
+  }
+  .evenItem {
+    flex-direction: row-reverse;
+  }
+}
