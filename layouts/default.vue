@@ -98,7 +98,7 @@
         <v-toolbar-title style="font-family: 'Montserrat-Bold';font-weight: 600;;font-size: 25px;color: #fff">
           <div style="display: flex;align-items: center">
             <img width="35px" src="~/assets/image/tomato.png" alt="">
-            <span style="color: #71ab71;font-weight: bold;margin-left: 5px">TomatoCheck</span>
+            <span class="title-tomato" style="color: #71ab71;font-weight: bold;margin-left: 5px">TomatoCheck</span>
           </div>
         </v-toolbar-title>
       </nuxt-link>

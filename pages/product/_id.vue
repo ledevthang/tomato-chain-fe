@@ -118,9 +118,9 @@
             </v-btn>
         </div>
           </v-form>
-          <div v-if="!currentAddress">
+          <!-- <div v-if="!currentAddress">
             <center><i>Connect your wallet to see dairy of this product</i></center>
-          </div>
+          </div> -->
         </div>
         <div style="width: 20%">
           <div style="color: red;margin-bottom: 20px;font-weight: bold">Scan QR to get information of this product</div>

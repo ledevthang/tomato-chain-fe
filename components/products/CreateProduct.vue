@@ -100,6 +100,7 @@
                 medium
                 depressed
                 dark
+                :loading="loading"
                 @click="createProduct()"
               >
                 Upload
@@ -175,7 +176,8 @@ export default {
     showPriceDialog: false,
     showSuccessDialog: false,
     hash: null,
-    msg: null
+    msg: null,
+    loading: false
   }),
   computed: {
     ...mapGetters('walletStore', [
@@ -218,7 +220,7 @@ export default {
     //   }
     // },
     async createProduct () {
-      this.showPriceDialog = false
+      this.loading = true
       try {
         console.log(this.allProduct.length, 'this.allProduct.length')
         const productLength = this.allProduct.length
@@ -246,10 +248,14 @@ export default {
             this.showSuccessDialog = true
             params.txHash = data.tx.txHash
             await axios.post('https://tomato-chain-default-rtdb.asia-southeast1.firebasedatabase.app/product.json', params)
+            this.loading = false
+            this.showPriceDialog = false
             this.reset()
           } else {
             this.msg = data.tx.msg
             this.hash = null
+            this.loading = false
+            this.showPriceDialog = false
             this.showSuccessDialog = true
           }
           this.changeTriggerUpdate()
@@ -258,6 +264,8 @@ export default {
         console.log(e)
         this.msg = 'Something wrong, please try again XD'
         this.hash = null
+        this.loading = false
+        this.showPriceDialog = false
         this.showSuccessDialog = true
       }
     },

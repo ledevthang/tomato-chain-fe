@@ -55,6 +55,7 @@
         :disabled="!valid"
         color="success"
         class="mr-4"
+        :loading="loading"
         @click="register"
       >
         Register
@@ -130,7 +131,8 @@ export default {
     count: 0,
     showSuccessDialog: false,
     hash: null,
-    msg: null
+    msg: null,
+    loading: false
   }),
   computed: {
     ...mapGetters('walletStore', [
@@ -159,6 +161,7 @@ export default {
       this.$router.push('/company')
     },
     async register () {
+      this.loading = true
       if (this.$refs.form.validate()) {
         const params = {
           companyID: this.allCompany.length + 1,
@@ -180,11 +183,13 @@ export default {
               this.msg = data.tx.msg
               this.hash = data.tx.txHash
               this.showSuccessDialog = true
+              this.loading = false
               params.txHash = data.tx.txHash
               await axios.post('https://tomato-chain-default-rtdb.asia-southeast1.firebasedatabase.app/company.json', params)
             } else {
               this.msg = data.tx.msg
               this.hash = null
+              this.loading = false
               this.showSuccessDialog = true
             }
             this.changeTriggerUpdate()
@@ -193,6 +198,7 @@ export default {
           console.log(e)
           this.msg = 'Something wrong, please try again XD'
           this.hash = null
+          this.loading = false
           this.showSuccessDialog = true
         }
       }

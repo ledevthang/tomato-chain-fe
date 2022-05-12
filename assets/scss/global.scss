@@ -295,3 +295,15 @@ header {
 .v-card {
   overflow: hidden;
 }
+.title-tomato {
+  @media screen and (max-width: 599px) {
+    display: none;
+  }
+}
+.card-company {
+  display: flex;
+  flex-wrap: wrap;
+  @media screen and (max-width: 599px) {
+    justify-content: center;
+  }
+}

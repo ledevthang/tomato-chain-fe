@@ -1,7 +1,7 @@
 <template>
   <div class="company">
     <div class="title">Products</div>
-    <div v-if="allProduct" class="d-flex flex-wrap justify-between">
+    <div v-if="allProduct" class="card-company">
       <!-- <div v-for="(item, index) in allProduct" :key="index">
         {{ item.productName }}
       </div> -->
