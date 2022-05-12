@@ -336,3 +336,68 @@ export const updateProductHash = async (productID, hash) => {
     tx
   }
 }
+
+export const writeProductDairy = async (productID, text) => {
+  const web3 = await initWeb3()
+  const contract = await new web3.eth.Contract(
+    contractABI,
+    contractAddress
+  )
+  let msg = null
+  let txHash = null
+  console.log(productID, text, 'productID, textproductID, text')
+  const accounts = await web3.eth.getAccounts()
+  const txData = await contract.methods.writeProductDairy(productID, text)
+  .send({ from: accounts[0] })
+  .then((receipt) => {
+    msg = 'Success!'
+    txHash = receipt.transactionHash
+  })
+  .catch((err) => {
+    msg = err.message
+  })
+
+  const tx = {
+    to: contractAddress,
+    data: txData,
+    txHash,
+    msg
+  }
+
+  return {
+    tx
+  }
+}
+export const getProductDairy = async (productID, index) => {
+  const web3 = await initWeb3()
+  const contract = await new web3.eth.Contract(
+    contractABI,
+    contractAddress
+  )
+  const txData = await contract.methods.productDairy(productID, index).call()
+
+  const tx = {
+    data: txData
+  }
+
+  return {
+    tx
+  }
+}
+
+export const getProductDairyByProductID = async (productID) => {
+  const web3 = await initWeb3()
+  const contract = await new web3.eth.Contract(
+    contractABI,
+    contractAddress
+  )
+  const txData = await contract.methods.getProductDairyByProductID(productID).call()
+
+  const tx = {
+    data: txData
+  }
+
+  return {
+    tx
+  }
+}

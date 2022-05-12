@@ -2,16 +2,12 @@
   <div class="company">
     <div class="title">Companies</div>
     <div v-if="allCompany" class="d-flex flex-wrap justify-between">
-      <!-- <div v-for="(item, index) in allCompany" :key="index">
-        {{ item.productName }}
-      </div> -->
       <v-card
         v-for="(item, index) in allCompany"
         :key="index"
         :loading="loading"
-        class="mr-3 my-12 text-center"
-        max-width="374"
-        @click="goToLink(item.companyAddress)"
+        class="mr-3 my-12 text-center custom-card"
+        max-width="274"
       >
         <template slot="progress">
           <v-progress-linear
@@ -21,7 +17,7 @@
           />
         </template>
 
-        <img height="130" class="mt-3" src="~/assets/image/nodata.png">
+        <img height="130" class="mt-3" src="~/assets/image/company.png">
 
         <v-card-title>{{ item.companyName }}</v-card-title>
 
@@ -31,7 +27,7 @@
             class="mx-0"
           >
             <v-rating
-              :value="4.5"
+              :value="0"
               color="amber"
               dense
               half-increments
@@ -40,12 +36,12 @@
             />
 
             <div class="grey--text ms-4">
-              4.5 (413)
+              0 (0)
             </div>
           </v-row>
 
           <div class="mt-4 text-left text-subtitle-1">
-            Food Company
+            {{ item.companyType }}
           </div>
         </v-card-text>
 
@@ -54,21 +50,28 @@
         <v-card-text>
           <v-chip-group
             v-model="selection"
-            active-class="deep-purple accent-4 white--text"
+            active-class="#DEF9EC accent-4 black--text"
             column
           >
-            <v-chip>Total Product: 161</v-chip>
-            <v-chip>Company Phone Number: {{ item.companyPhoneNumber }}</v-chip>
+            <v-chip>Total Product: {{ totalProduct(item.companyName) }}</v-chip>
+            <v-chip>Phone Number: {{ item.companyPhoneNumber }}</v-chip>
 
-            <v-chip>Company Email: {{ item.companyEmail }}</v-chip>
+            <v-chip>Email: {{ item.companyEmail }}</v-chip>
           </v-chip-group>
         </v-card-text>
         <v-card-actions>
+          <v-spacer />
           <v-btn
-            color="deep-purple lighten-2"
-            text
+            class="custom-btn-green"
+            dense
+            @click="$router.push('/company/' + item.companyID)"
           >
-            Contact
+            <b>
+              See details
+            </b>
+            <v-icon class="ml-1">
+              mdi-arrow-right-bold-circle
+            </v-icon>
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -89,7 +92,8 @@ export default {
     ]),
     ...mapGetters('companyStore', [
       'allCompany',
-      'companyInfo'
+      'companyInfo',
+      'allProduct'
     ])
   },
   methods: {
@@ -97,6 +101,12 @@ export default {
       this.loading = true
 
       setTimeout(() => (this.loading = false), 2000)
+    },
+    totalProduct (companyName) {
+      // console.log(companyAddress, 'companyAddress')
+      if (this.allProduct) {
+        return this.allProduct.filter((item) => item.companyName === companyName).length
+      }
     },
     goToLink (companyAddress) {
       const x = this.$getScanLink(companyAddress, 'address')

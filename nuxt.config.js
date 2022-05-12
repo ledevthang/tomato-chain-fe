@@ -21,7 +21,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/tomato-logo.png' }
+      { rel: 'icon', type: 'image/x-icon', href: '/tomato.png' }
     ]
   },
 
@@ -66,6 +66,25 @@ export default {
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
     baseURL: '/'
+  },
+  generate: {
+    routes () {
+      const dataConverted = []
+      for (let i = 1; i <= 30; i++) {
+        dataConverted.push('/product/' + i)
+        dataConverted.push('/company/' + i)
+      }
+      return dataConverted
+      // return axios.get('https://tomato-chain-default-rtdb.asia-southeast1.firebasedatabase.app/product.json').then((data) => {
+      //   const dataConverted = []
+      //   for (const key in data.data) {
+      //     dataConverted.push({ ...data.data[key] })
+      //   }
+      //   return dataConverted.map((user) => {
+      //     return '/product/' + user.productID
+      //   })
+      // })
+    }
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

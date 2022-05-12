@@ -1,5 +1,5 @@
 * {
-  font-family: 'Montserrat';
+  // font-family: 'Montserrat';
   font-weight: 400;
   ::-webkit-scrollbar {
     width: 3px!important;
@@ -253,4 +253,45 @@ header {
 .title {
   font-size: 30px;
   color: #28a745;
+}
+.custom-card {
+  border-radius: 15px;
+  border: 1px solid #ececec!important;
+  cursor: pointer;
+  transition: .2s;
+  box-shadow: none!important;
+}
+.custom-card:hover {
+  border: 1px solid #BCE3C9!important;
+  box-shadow: 5px 5px 15px rgb(0 0 0 / 5%)!important;
+}
+.custom-btn-green{
+  box-shadow: none!important;
+  text-transform: unset;
+  background-color: #DEF9EC!important;
+  b, i {
+    color: #3BB77E!important;
+  }
+  &:hover {
+    b, i {
+      color: #fff!important;
+    }
+    background: #3bb77e!important;
+  }
+}
+.btn-menu {
+  i {
+    color: rgb(37, 61, 78)!important;
+  }
+}
+.btn-menu:hover {
+  i, b {
+    color: #3BB77E !important;
+  }
+}
+.product-item-image img {
+  width: 85px;
+}
+.v-card {
+  overflow: hidden;
 }

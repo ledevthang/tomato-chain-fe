@@ -1,0 +1,65 @@
+[
+  {
+    "name": "company",
+    "path": "/company",
+    "component": "/Users/leducthang/Desktop/vuejs/tomato-chain-fe/pages/company/index.vue",
+    "chunkName": "pages/company/index",
+    "_name": "_6f6a3312"
+  },
+  {
+    "name": "create-product",
+    "path": "/create-product",
+    "component": "/Users/leducthang/Desktop/vuejs/tomato-chain-fe/pages/create-product/index.vue",
+    "chunkName": "pages/create-product/index",
+    "_name": "_612ec2ba"
+  },
+  {
+    "name": "home",
+    "path": "/home",
+    "component": "/Users/leducthang/Desktop/vuejs/tomato-chain-fe/pages/home/index.vue",
+    "chunkName": "pages/home/index",
+    "_name": "_393bfb0a"
+  },
+  {
+    "name": "inspire",
+    "path": "/inspire",
+    "component": "/Users/leducthang/Desktop/vuejs/tomato-chain-fe/pages/inspire.vue",
+    "chunkName": "pages/inspire",
+    "_name": "_8ae9b25e"
+  },
+  {
+    "name": "product-retrieval",
+    "path": "/product-retrieval",
+    "component": "/Users/leducthang/Desktop/vuejs/tomato-chain-fe/pages/product-retrieval/index.vue",
+    "chunkName": "pages/product-retrieval/index",
+    "_name": "_74e14bd0"
+  },
+  {
+    "name": "register",
+    "path": "/register",
+    "component": "/Users/leducthang/Desktop/vuejs/tomato-chain-fe/pages/register/index.vue",
+    "chunkName": "pages/register/index",
+    "_name": "_36a64ebf"
+  },
+  {
+    "name": "company-id",
+    "path": "/company/:id",
+    "component": "/Users/leducthang/Desktop/vuejs/tomato-chain-fe/pages/company/_id.vue",
+    "chunkName": "pages/company/_id",
+    "_name": "_7f7e1a9f"
+  },
+  {
+    "name": "product-id",
+    "path": "/product/:id?",
+    "component": "/Users/leducthang/Desktop/vuejs/tomato-chain-fe/pages/product/_id.vue",
+    "chunkName": "pages/product/_id",
+    "_name": "_734e1911"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/Users/leducthang/Desktop/vuejs/tomato-chain-fe/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_47b82c89"
+  }
+]

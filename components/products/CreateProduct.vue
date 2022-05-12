@@ -183,7 +183,8 @@ export default {
     ]),
     ...mapGetters('companyStore', [
       'currentCompany',
-      'allProduct'
+      'allProduct',
+      'companyInfo'
     ])
   },
   created () {
@@ -228,6 +229,7 @@ export default {
           productPrice: +this.productPrice,
           productDescription: this.productDescription,
           Provider: this.currentAddress,
+          companyName: this.companyInfo.companyName,
           retailer: this.retailer,
           isConfirmByRetailer: false,
           dateOfManufacture: this.dateOfManufacture,

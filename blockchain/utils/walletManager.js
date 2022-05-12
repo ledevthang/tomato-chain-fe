@@ -119,7 +119,7 @@ function logout () {
 
 async function getBalances () {
   try {
-    const web3 = new Web3(new Web3.providers.HttpProvider('https://eth-ropsten.alchemyapi.io/v2/YIm2xGP2lu-Y5BgBp3YSOuTknQQHPD-_'))
+    const web3 = new Web3(new Web3.providers.HttpProvider('https://eth-ropsten.alchemyapi.io/v2/gu1DWdYJJ3RyJgdeMocUjxi0miOAzt1t'))
     const userBalance = await web3.eth.getBalance(currentAddress)
     console.log(currentAddress, userBalance / 10 ** 18, 'userBalanceuserBalance')
     return userBalance

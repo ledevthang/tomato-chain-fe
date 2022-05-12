@@ -9,9 +9,8 @@
         v-for="(item, index) in allProduct"
         :key="index"
         :loading="loading"
-        class="mr-3 my-12 text-center"
-        max-width="374"
-        @click="$router.push('/product/' + item.productID)"
+        class="mr-3 my-12 text-center custom-card"
+        max-width="274"
       >
         <template slot="progress">
           <v-progress-linear
@@ -21,7 +20,7 @@
           />
         </template>
 
-        <img height="130" class="mt-3" src="~/assets/image/not-found-image.svg">
+        <img height="130" class="mt-3" src="~/assets/image/tomato.png">
 
         <v-card-title>{{ item.productName }}</v-card-title>
 
@@ -31,7 +30,7 @@
             class="mx-0"
           >
             <v-rating
-              :value="4.5"
+              :value="0"
               color="amber"
               dense
               half-increments
@@ -40,13 +39,13 @@
             />
 
             <div class="grey--text ms-4">
-              4.5 (413)
+              0 (0)
             </div>
           </v-row>
 
-          <div class="mt-4 text-left text-subtitle-1">
+          <!-- <div class="mt-4 text-left text-subtitle-1">
             $ • Italian, Vegetable
-          </div>
+          </div> -->
         </v-card-text>
 
         <v-divider class="mx-4"/>
@@ -54,26 +53,33 @@
         <v-card-text>
           <v-chip-group
             v-model="selection"
-            active-class="deep-purple accent-4 white--text"
+            active-class="#DEF9EC accent-4 black--text"
             column
           >
-            <v-chip>Product Price: ${{ item.productPrice }}</v-chip>
+            <!-- <v-chip>Product Price: ${{ item.productPrice }}</v-chip>
 
             <v-chip>Date Of Manufacture: {{ item.dateOfManufacture }}</v-chip>
 
-            <v-chip>Expiration Date: {{ item.expirationDate }}</v-chip>
+            <v-chip>Expiration Date: {{ item.expirationDate }}</v-chip>-->
 
-            <v-chip>Quantity: {{ item.quantity }}</v-chip>
+            <v-chip>Provider: {{ item.companyName }}</v-chip>
             <v-chip>ID: TMT{{ item.productID }}</v-chip>
           </v-chip-group>
         </v-card-text>
         <v-card-actions>
+          <!-- @click.stop="goToLink(item.Provider)" -->
+          <v-spacer />
           <v-btn
-            color="deep-purple lighten-2"
-            text
-            @click.stop="goToLink(item.Provider)"
+            class="custom-btn-green"
+            dense
+            @click="$router.push('/product/' + item.productID)"
           >
-            Provider: {{ $shortAddress(item.Provider, 10) }}
+            <b>
+              See details
+            </b>
+            <v-icon class="ml-1">
+              mdi-arrow-right-bold-circle
+            </v-icon>
           </v-btn>
         </v-card-actions>
       </v-card>

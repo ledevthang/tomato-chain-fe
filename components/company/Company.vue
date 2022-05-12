@@ -70,7 +70,7 @@
                   </div>
                   <div v-for="(item, index) in companyProducts" :key="index" class="product-item" @click="$router.push('/product/' + item.productID)">
                     <div class="product-item-image">
-                      <img src="~/assets/image/not-found-image.svg" alt="">
+                      <img src="~/assets/image/tomato.png" alt="">
                     </div>
                     <b>{{ item.productName }}</b>
                   </div>

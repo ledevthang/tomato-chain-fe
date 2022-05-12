@@ -22,19 +22,6 @@
           </v-btn>
         </div>
         <div class="link-wrap-mobile">
-          <!-- <div v-if="$route.path === '/'" @click="$vuetify.goTo('#about')">
-            About
-          </div>
-          <div v-else @click="$router.push('/#about')">
-            About
-          </div>
-          <div v-if="$route.path === '/'" @click="$vuetify.goTo('#hiw')">
-            How It Works
-          </div>
-          -->
-          <!-- <div @click="$router.push('/company')">
-            Company
-          </div> -->
           <v-btn
             color="rgb(40 167 69 / 80%)"
             dense
@@ -68,7 +55,7 @@
             @click="$router.push('/product-retrieval')"
           >
             <b style="color: #fff">
-              Product Retrieval
+              Scan QR
               <v-icon dark>
                 mdi-barcode-scan
               </v-icon>
@@ -109,7 +96,10 @@
     >
       <nuxt-link to="/" style="color: #000;text-decoration: none">
         <v-toolbar-title style="font-family: 'Montserrat-Bold';font-weight: 600;;font-size: 25px;color: #fff">
-          <img src="~/assets/image/tomato-logo.png" alt="">
+          <div style="display: flex;align-items: center">
+            <img width="35px" src="~/assets/image/tomato.png" alt="">
+            <span style="color: #71ab71;font-weight: bold;margin-left: 5px">TomatoCheck</span>
+          </div>
         </v-toolbar-title>
       </nuxt-link>
       <v-spacer />
@@ -120,10 +110,11 @@
             dense
             depressed
             rounded
-            class="mr-3"
+            text
+            class="mr-3 btn-menu"
             @click="$router.push('/home')"
           >
-            <b style="color: #fff">
+            <b style="color: #253D4E;">
               Home
             </b>
           </v-btn>
@@ -132,19 +123,27 @@
             dense
             depressed
             rounded
-            class="mr-3"
+            text
+            class="mr-3 btn-menu"
             @click="$router.push('/')"
           >
-            <b style="color: #fff">
+            <b style="color: #253D4E;">
               About us
             </b>
           </v-btn>
           <div @click="$router.push('/product-retrieval')">
             <v-btn
+              class="btn-menu"
+              text
               color="rgb(40 167 69 / 80%)"
-              dark
+              dense
+              depressed
+              rounded
             >
-              <v-icon dark>
+              <b style="color: #253D4E;">
+                Scan QR
+              </b>
+              <v-icon class="ml-2" dark>
                 mdi-barcode-scan
               </v-icon>
             </v-btn>
@@ -203,10 +202,9 @@
       </div>
       <v-app-bar-nav-icon v-if="isMobile" @click.stop="drawer = !drawer" />
     </v-app-bar>
-    <v-main>
-      <!-- <v-container> -->
+    <!-- <v-main style="background: #BCE3C9;"> -->
+      <v-main>
       <nuxt />
-      <!-- </v-container> -->
     </v-main>
     <v-footer
       :absolute="!fixed"

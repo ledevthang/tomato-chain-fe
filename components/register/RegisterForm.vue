@@ -18,7 +18,20 @@
       :rules="companyRules"
       label="Company name"
       required
-      solo
+      outlined
+    />
+    <v-text-field
+      v-model="companyType"
+      :rules="companyRules"
+      label="Company Type"
+      required
+      outlined
+    />
+    <v-text-field
+      v-model="companyDescription"
+      :rules="companyRules"
+      label="Company Description"
+      required
       outlined
     />
 
@@ -27,7 +40,6 @@
       :rules="emailRules"
       label="Email"
       required
-      solo
       outlined
     />
 
@@ -36,7 +48,6 @@
       :rules="phoneRules"
       label="Phone number"
       required
-      solo
       outlined
     />
     <div style="color: black;font-weight: bold;display: flex;align-items: center;justify-content: space-between">
@@ -113,6 +124,8 @@ export default {
     companyRules: [
       v => !!v || 'Company name is required'
     ],
+    companyDescription: 'Company description',
+    companyType: 'Farm Company',
     checkbox: false,
     count: 0,
     showSuccessDialog: false,
@@ -122,6 +135,9 @@ export default {
   computed: {
     ...mapGetters('walletStore', [
       'currentAddress'
+    ]),
+    ...mapGetters('companyStore', [
+      'allCompany'
     ])
   },
   watch: {
@@ -145,9 +161,12 @@ export default {
     async register () {
       if (this.$refs.form.validate()) {
         const params = {
+          companyID: this.allCompany.length + 1,
           companyAddress: this.companyAddress,
           companyName: this.company,
           companyPhoneNumber: this.phone,
+          companyDescription: this.companyDescription,
+          companyType: this.companyType,
           companyEmail: this.email,
           amount: 0.01,
           currentAddress: this.currentAddress

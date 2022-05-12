@@ -23,28 +23,28 @@
             />
           </template>
 
-          <img height="130" class="mt-3" src="~/assets/image/not-found-image.svg">
+          <img height="130" class="mt-3" src="~/assets/image/tomato.png">
 
           <v-card-title>{{ product.productName }}</v-card-title>
 
           <v-card-text>
             <v-row
-              align="center"
-              class="mx-0"
-            >
-              <v-rating
-                :value="4.5"
-                color="amber"
-                dense
-                half-increments
-                readonly
-                size="14"
-              />
+            align="center"
+            class="mx-0"
+          >
+            <v-rating
+              :value="0"
+              color="amber"
+              dense
+              half-increments
+              readonly
+              size="14"
+            />
 
-              <div class="grey--text ms-4">
-                4.5 (413)
-              </div>
-            </v-row>
+            <div class="grey--text ms-4">
+              0 (0)
+            </div>
+          </v-row>
 
             <div class="mt-4 text-left text-subtitle-1">
               $ • Italian, Vegetable
@@ -56,7 +56,7 @@
           <v-card-text>
             <v-chip-group
               v-model="selection"
-              active-class="deep-purple accent-4 white--text"
+              active-class="#DEF9EC accent-4 black--text"
               column
             >
               <v-chip>ID: TMT{{ product.productID }}</v-chip>
@@ -74,16 +74,56 @@
           </v-card-text>
           <v-card-actions>
             <v-btn
-              color="deep-purple lighten-2"
+              color="rgba(40, 167, 69, 0.8)"
               text
               @click.stop="goToLink(product.Provider)"
             >
-              Provider: {{ $shortAddress(product.Provider, 10) }}
+              <b>Company: {{ product.companyName }}</b>
             </v-btn>
           </v-card-actions>
         </v-card>
-        <div style="width: 50%">
-          <div style="color: red;margin-bottom: 20px;font-weight: bold">Go to Product Retrieval to scan product</div>
+        <div style="width: 30%;background: #FFFCEB;border-radius: 15px;padding: 10px;position: relative">
+          <div v-for="(item, index) in dairyArray" :key="index">
+            <div>
+              <b>{{ $convertTime(item.timestamp, 'DD/MM/YYYY') }}</b>
+            </div>
+            <div class="px-3">
+              <i>{{ item.message }}</i>
+            </div>
+          </div>
+          <v-form
+            v-if="product.Provider === currentAddress"
+            ref="form"
+            v-model="valid"
+            style="position: absolute;bottom: 10px;left: 50%;transform: translate(-50%, 0);width: 100%"
+            lazy-validation
+          >
+            <v-text-field
+              v-model="text"
+              :rules="productRule"
+              style="width: 100%"
+              label="Diary content"
+              required
+              outlined
+            />
+            <div class="btn-zone" style="display: flex;align-items: center;justify-content: center;">
+            <v-btn
+              :disabled="!valid"
+              class="mt-5"
+              rounded
+              color="#c8e4cc"
+              @click="writeProductDairy"
+            >
+              <b>Write Product's Diary</b>
+            </v-btn>
+        </div>
+          </v-form>
+          <div v-if="!currentAddress">
+            <center><i>Connect your wallet to see dairy of this product</i></center>
+          </div>
+        </div>
+        <div style="width: 20%">
+          <div style="color: red;margin-bottom: 20px;font-weight: bold">Scan QR to get information of this product</div>
           <qr-code id='qrid' :text="url" />
           <v-btn
             class="mt-5"
@@ -100,15 +140,44 @@
         Not found product
       </div>
     </div>
+    <v-dialog
+        v-model="showSuccessDialog"
+        width="300px"
+      >
+        <v-card light style="padding: 10px;text-align: center">
+          <v-card-actions style="flex-direction: column">
+            <div style="width: 100%" class="text-zone">
+              <b style="font-size: 20px">{{ msg }}</b>
+              <div v-if="hash">
+                <a :href="$getScanLink(hash, 'tx')">
+                  {{ hash }}
+                </a>
+              </div>
+            </div>
+            <v-spacer />
+            <div style="margin: 20px 0" class="action-zone">
+              <v-btn
+                color="#28a745"
+                medium
+                depressed
+                dark
+                @click="showSuccessDialog = false"
+              >
+                Good!
+              </v-btn>
+            </div>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
   </v-container>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import axios from 'axios'
-// import * as CompanyContract from '~/blockchain/utils/CompanyContract'
+import * as CompanyContract from '~/blockchain/utils/CompanyContract'
 export default {
-  async asyncData ({ params }) {
+  async asyncData ({ params, store }) {
     const id = +params.id
     const data = await axios.get('https://tomato-chain-default-rtdb.asia-southeast1.firebasedatabase.app/product.json')
     const dataConverted = []
@@ -121,7 +190,17 @@ export default {
   data: () => ({
     loading: false,
     selection: 1,
-    url: ''
+    url: '',
+    showSuccessDialog: false,
+    text: '',
+    hash: null,
+    msg: null,
+    valid: true,
+    productRule: [
+      v => !!v || 'This field cannot be left blank',
+      v => (v && v.length <= 42) || 'Too long'
+    ],
+    dairyArray: []
   }),
   computed: {
     ...mapGetters('walletStore', [
@@ -132,10 +211,66 @@ export default {
       'companyInfo'
     ])
   },
+  watch: {
+    async currentAddress (newVal) {
+      if (newVal) {
+        const dairyLength = await CompanyContract.getProductDairyByProductID(this.id)
+        this.dairyArray = []
+        for (let i = 0; i < dairyLength.tx.data; i++) {
+          let data = await CompanyContract.getProductDairy(this.id, i)
+          this.dairyArray.push(data.tx.data)
+        }
+      }
+    }
+  },
+  async created () {
+    if (this.currentAddress) {
+      const dairyLength = await CompanyContract.getProductDairyByProductID(this.id)
+      this.dairyArray = []
+      for (let i = 0; i < dairyLength.tx.data; i++) {
+        let data = await CompanyContract.getProductDairy(this.id, i)
+        this.dairyArray.push(data.tx.data)
+      }
+    }
+  },
   mounted () {
     this.url = window.location.href
   },
   methods: {
+    async updateDairy () {
+      const dairyLength = await CompanyContract.getProductDairyByProductID(this.id)
+      this.dairyArray = []
+      for (let i = 0; i < dairyLength.tx.data; i++) {
+        let data = await CompanyContract.getProductDairy(this.id, i)
+        this.dairyArray.push(data.tx.data)
+      }
+    },
+    async writeProductDairy () {
+      if (this.$refs.form.validate()) {
+        try {
+          const data = await CompanyContract.writeProductDairy(this.id, this.text.toString())
+          console.log(data, 'data')
+          setTimeout(async () => {
+            if (data.tx.txHash) {
+              this.msg = data.tx.msg
+              this.hash = data.tx.txHash
+              this.showSuccessDialog = true
+              this.updateDairy()
+              this.$refs.form.reset()
+            } else {
+              this.msg = data.tx.msg
+              this.hash = null
+              this.showSuccessDialog = true
+            }
+          }, 2000)
+        } catch (e) {
+          console.log(e)
+          this.msg = 'Something wrong, please try again XD'
+          this.hash = null
+          this.showSuccessDialog = true
+        }
+      }
+    },
     goToLink (companyAddress) {
       const x = this.$getScanLink(companyAddress, 'address')
       window.open(x, '_blank')
