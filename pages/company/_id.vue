@@ -192,9 +192,7 @@ export default {
     ])
   },
   mounted () {
-    if (this.currentAddress) {
-      this.getProduct()
-    }
+    this.getProduct()
   },
   methods: {
     ...mapActions('companyStore', [

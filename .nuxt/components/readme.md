@@ -6,9 +6,9 @@ You can directly use them in pages and other components without the need to impo
 
 **Tip:** If a component is conditionally rendered with `v-if` and is big, it is better to use `Lazy` or `lazy-` prefix to lazy load.
 
-- `<CommonChooseWallet>` | `<common-choose-wallet>` (components/common/ChooseWallet.vue)
 - `<CompanyCompanies>` | `<company-companies>` (components/company/Companies.vue)
 - `<Company>` | `<company>` (components/company/Company.vue)
+- `<CommonChooseWallet>` | `<common-choose-wallet>` (components/common/ChooseWallet.vue)
 - `<HomepageAbout>` | `<homepage-about>` (components/homepage/About.vue)
 - `<HomepageBanner>` | `<homepage-banner>` (components/homepage/Banner.vue)
 - `<HomepageHowItWork>` | `<homepage-how-it-work>` (components/homepage/HowItWork.vue)

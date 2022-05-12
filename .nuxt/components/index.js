@@ -1,6 +1,6 @@
-export { default as CommonChooseWallet } from '../../components/common/ChooseWallet.vue'
 export { default as CompanyCompanies } from '../../components/company/Companies.vue'
 export { default as Company } from '../../components/company/Company.vue'
+export { default as CommonChooseWallet } from '../../components/common/ChooseWallet.vue'
 export { default as HomepageAbout } from '../../components/homepage/About.vue'
 export { default as HomepageBanner } from '../../components/homepage/Banner.vue'
 export { default as HomepageHowItWork } from '../../components/homepage/HowItWork.vue'

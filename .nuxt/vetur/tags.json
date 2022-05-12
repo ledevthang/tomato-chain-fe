@@ -1,12 +1,12 @@
 {
-  "CommonChooseWallet": {
-    "description": "Auto imported from components/common/ChooseWallet.vue"
-  },
   "CompanyCompanies": {
     "description": "Auto imported from components/company/Companies.vue"
   },
   "Company": {
     "description": "Auto imported from components/company/Company.vue"
+  },
+  "CommonChooseWallet": {
+    "description": "Auto imported from components/common/ChooseWallet.vue"
   },
   "HomepageAbout": {
     "description": "Auto imported from components/homepage/About.vue"
