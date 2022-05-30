@@ -32,17 +32,16 @@ export const registerCompany = async (
       .integerValue()
   }
   const _amount = calculateBalanceSend(params.amount)
-  // const amountInHex = '0x' + _amount.toString(16)
-  // const accounts = await web3.eth.getAccounts()
   let msg = null
   let txHash = null
+  // console.log(web3.eth.abi.encodeParameter('bytes32', params.companyName), '122121')
+  console.log(web3.utils.asciiToHex(params.companyName), '122121')
   const txData = await contract.methods.setCompany(
     params.companyAddress,
-    params.companyName
-    // params.companyPhoneNumber,
-    // params.companyEmail
+    web3.utils.asciiToHex(params.companyName)
   ).send({ from: params.currentAddress, value: _amount })
     .then((receipt) => {
+      console.log(receipt, 'receipt');
       msg = 'Success!'
       txHash = receipt.transactionHash
     })
@@ -79,14 +78,15 @@ export const createProduct = async (
   const _amount = calculateBalanceSend(params.amount)
   let msg = null
   let txHash = null
+  console.log(web3.utils.asciiToHex(params.productName), '1')
+  console.log(web3.utils.asciiToHex(params.retailer), '2')
   const txData = await contract.methods.createProduct(
     params.productID,
-    params.productName,
-    // params.productPrice,
-    // params.productDescription,
+    web3.utils.asciiToHex(params.productName),
     params.Provider,
     params.isConfirmByRetailer,
-    params.retailer
+    web3.utils.asciiToHex(params.retailer),
+    // params.retailer
     // params.dateOfManufacture,
     // params.expirationDate,
     // params.quantity
@@ -347,7 +347,7 @@ export const writeProductDairy = async (productID, text) => {
   let txHash = null
   console.log(productID, text, 'productID, textproductID, text')
   const accounts = await web3.eth.getAccounts()
-  const txData = await contract.methods.writeProductDairy(productID, text)
+  const txData = await contract.methods.writeProductDairy(productID, web3.utils.asciiToHex(text))
   .send({ from: accounts[0] })
   .then((receipt) => {
     msg = 'Success!'

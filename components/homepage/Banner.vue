@@ -1,7 +1,7 @@
 <template>
   <div class="banner">
     <div>
-      <img src="https://trace.icheck.vn/frontendv3/assets/images/new/slider-bg.png" alt="">
+      <img style="filter: brightness(60%);" src="~/assets/image/about-us-banner.svg" alt="">
     </div>
     <v-container class="banner-content">
       <div class="banner-content__caption">
@@ -10,8 +10,8 @@
       <div class="banner-content__sub-caption">
         For the traceability of your products from origin to final consumer
       </div>
-      <v-btn outlined large style="color: #fff;text-decoration: none" @click="$router.push('/register')">
-        Register now!
+      <v-btn outlined rounded large style="color: #fff;text-decoration: none;padding: 0 30px" @click="$router.push('/register')">
+        Register now
       </v-btn>
     </v-container>
   </div>

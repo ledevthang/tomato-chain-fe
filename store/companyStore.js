@@ -36,8 +36,8 @@ export const actions = {
   },
   changeCompanyInfo ({ commit }, payload) {
     if (payload) {
-      const { companyAddress, companyEmail, companyName, companyPhoneNumber } = payload
-      commit('CHANGE_COMPANY_INFO', { companyAddress, companyEmail, companyName, companyPhoneNumber })
+      // const { companyAddress, companyEmail, companyName, companyPhoneNumber } = payload
+      commit('CHANGE_COMPANY_INFO', payload)
     }
   },
   changeCompanyProduct ({ commit }, payload) {

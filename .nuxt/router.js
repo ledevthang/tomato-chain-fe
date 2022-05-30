@@ -4,9 +4,9 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
+const _45569f3a = () => interopDefault(import('../pages/about-us/index.vue' /* webpackChunkName: "pages/about-us/index" */))
 const _6f6a3312 = () => interopDefault(import('../pages/company/index.vue' /* webpackChunkName: "pages/company/index" */))
 const _612ec2ba = () => interopDefault(import('../pages/create-product/index.vue' /* webpackChunkName: "pages/create-product/index" */))
-const _393bfb0a = () => interopDefault(import('../pages/home/index.vue' /* webpackChunkName: "pages/home/index" */))
 const _8ae9b25e = () => interopDefault(import('../pages/inspire.vue' /* webpackChunkName: "pages/inspire" */))
 const _74e14bd0 = () => interopDefault(import('../pages/product-retrieval/index.vue' /* webpackChunkName: "pages/product-retrieval/index" */))
 const _36a64ebf = () => interopDefault(import('../pages/register/index.vue' /* webpackChunkName: "pages/register/index" */))
@@ -26,6 +26,10 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
+    path: "/about-us",
+    component: _45569f3a,
+    name: "about-us"
+  }, {
     path: "/company",
     component: _6f6a3312,
     name: "company"
@@ -33,10 +37,6 @@ export const routerOptions = {
     path: "/create-product",
     component: _612ec2ba,
     name: "create-product"
-  }, {
-    path: "/home",
-    component: _393bfb0a,
-    name: "home"
   }, {
     path: "/inspire",
     component: _8ae9b25e,

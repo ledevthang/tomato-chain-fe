@@ -90,9 +90,9 @@
             "type": "uint256"
           },
           {
-            "internalType": "string",
+            "internalType": "bytes32",
             "name": "productName",
-            "type": "string"
+            "type": "bytes32"
           },
           {
             "internalType": "address",
@@ -100,9 +100,9 @@
             "type": "address"
           },
           {
-            "internalType": "string",
+            "internalType": "bytes32",
             "name": "Retailer",
-            "type": "string"
+            "type": "bytes32"
           },
           {
             "internalType": "bool",
@@ -130,9 +130,9 @@
             "type": "address"
           },
           {
-            "internalType": "string",
+            "internalType": "bytes32",
             "name": "companyName",
-            "type": "string"
+            "type": "bytes32"
           }
         ],
         "indexed": false,
@@ -155,7 +155,8 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [],
@@ -168,7 +169,8 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [],
@@ -181,7 +183,8 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -199,13 +202,14 @@
         "type": "address"
       },
       {
-        "internalType": "string",
+        "internalType": "bytes32",
         "name": "companyName",
-        "type": "string"
+        "type": "bytes32"
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -224,7 +228,8 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -266,7 +271,8 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [],
@@ -279,7 +285,8 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -302,13 +309,14 @@
         "type": "uint256"
       },
       {
-        "internalType": "string",
+        "internalType": "bytes32",
         "name": "message",
-        "type": "string"
+        "type": "bytes32"
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -326,9 +334,9 @@
         "type": "uint256"
       },
       {
-        "internalType": "string",
+        "internalType": "bytes32",
         "name": "productName",
-        "type": "string"
+        "type": "bytes32"
       },
       {
         "internalType": "address",
@@ -336,9 +344,9 @@
         "type": "address"
       },
       {
-        "internalType": "string",
+        "internalType": "bytes32",
         "name": "Retailer",
-        "type": "string"
+        "type": "bytes32"
       },
       {
         "internalType": "bool",
@@ -347,7 +355,8 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -402,11 +411,13 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "stateMutability": "payable",
-    "type": "receive"
+    "type": "receive",
+    "payable": true
   },
   {
     "inputs": [
@@ -429,9 +440,9 @@
         "type": "uint256"
       },
       {
-        "internalType": "string",
+        "internalType": "bytes32",
         "name": "productName",
-        "type": "string"
+        "type": "bytes32"
       },
       {
         "internalType": "address",
@@ -444,15 +455,16 @@
         "type": "bool"
       },
       {
-        "internalType": "string",
+        "internalType": "bytes32",
         "name": "Retailer",
-        "type": "string"
+        "type": "bytes32"
       }
     ],
     "name": "createProduct",
     "outputs": [],
     "stateMutability": "payable",
-    "type": "function"
+    "type": "function",
+    "payable": true
   },
   {
     "inputs": [
@@ -462,9 +474,9 @@
         "type": "uint256"
       },
       {
-        "internalType": "string",
+        "internalType": "bytes32",
         "name": "_message",
-        "type": "string"
+        "type": "bytes32"
       }
     ],
     "name": "writeProductDairy",
@@ -489,7 +501,8 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -508,7 +521,8 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -518,15 +532,16 @@
         "type": "address"
       },
       {
-        "internalType": "string",
+        "internalType": "bytes32",
         "name": "companyName",
-        "type": "string"
+        "type": "bytes32"
       }
     ],
     "name": "setCompany",
     "outputs": [],
     "stateMutability": "payable",
-    "type": "function"
+    "type": "function",
+    "payable": true
   },
   {
     "inputs": [],

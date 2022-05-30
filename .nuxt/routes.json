@@ -1,5 +1,12 @@
 [
   {
+    "name": "about-us",
+    "path": "/about-us",
+    "component": "/Users/leducthang/Desktop/vuejs/tomato-chain-fe/pages/about-us/index.vue",
+    "chunkName": "pages/about-us/index",
+    "_name": "_45569f3a"
+  },
+  {
     "name": "company",
     "path": "/company",
     "component": "/Users/leducthang/Desktop/vuejs/tomato-chain-fe/pages/company/index.vue",
@@ -12,13 +19,6 @@
     "component": "/Users/leducthang/Desktop/vuejs/tomato-chain-fe/pages/create-product/index.vue",
     "chunkName": "pages/create-product/index",
     "_name": "_612ec2ba"
-  },
-  {
-    "name": "home",
-    "path": "/home",
-    "component": "/Users/leducthang/Desktop/vuejs/tomato-chain-fe/pages/home/index.vue",
-    "chunkName": "pages/home/index",
-    "_name": "_393bfb0a"
   },
   {
     "name": "inspire",

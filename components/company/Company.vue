@@ -1,53 +1,65 @@
 <template>
   <div class="company">
     <div v-if="companyInfo">
-      <div>
-        <h2 style="background: #c8e4cc;border-radius: 6px" class="text-center py-6 mb-5">
-          <b style="font-family: 'Montserrat-Bold';font-size: 30px;color: #4f5f6e;">
-            MY COMPANY
-          </b>
-        </h2>
-      </div>
       <v-card color="basil">
         <div class="company-zone mb-5">
-          <div class="company-image">
-            <img src="~/assets/image/not-found-image.svg" alt="">
+          <div class="company-img-zone">
+            <img :src="getUrlRandom" alt="">
           </div>
-          <div class="text-left">
-            <v-card-title class="text-left px-0 py-6">
+          <div class="company-info-zone">
+            <v-card-title class="text-left px-0 py-0 pb-6">
               <h3 class="font-weight-bold text-h4 basil--text">
                 {{ companyInfo.companyName }}
               </h3>
             </v-card-title>
             <div class="title-zone">
-              <div>Company name: <span>{{ companyInfo.companyName }}</span></div>
+              <div
+                class="mx-0 d-flex align-center"
+              >
+                <v-rating
+                    :value="0"
+                    background-color="#d6d6d6"
+                    color="yellow"
+                    dense
+                    half-increments
+                    size="20"
+                  />
+
+                <div class="ms-4">
+                  0 review
+                </div>
+            </div>
+            <div class="description-company">
+              <div>ID <span>{{ companyInfo.companyID }}</span> </div>
               <div>
-                Company address:
+                Address
                 <span>
                   <a :href="$getScanLink(companyInfo.companyAddress, 'address')" target="_blank">
                     {{ $shortAddress(companyInfo.companyAddress, 15) }}
                   </a>
                 </span>
               </div>
-              <div>Company email: <span>{{ companyInfo.companyEmail }}</span></div>
-              <div>Company phone number: <span>{{ companyInfo.companyPhoneNumber }}</span></div>
+              <div>Type <span>{{ companyInfo.companyType }}</span> </div>
+              <div>Email <span>{{ companyInfo.companyEmail }}</span></div>
+              <div>Phone number <span>{{ companyInfo.companyPhoneNumber }}</span></div>
+              <div>Description <span>{{ companyInfo.companyDescription }}</span></div>
+            </div>
             </div>
           </div>
         </div>
-
-        <v-tabs
-          v-model="tab"
-          background-color="#28a745"
-          center-active
-          color="#fff"
-        >
-          <v-tab
-            v-for="item in items"
-            :key="item"
+        <div class="custom-tab">
+          <v-btn v-for="(item, index) in items"
+            :key="index"
+            rounded
+            large
+            :text="tab !== index"
+            color="#37AB76"
+            :style="{color: tab !== index ? '#757575' : '#fff'}"
+            @click="tab = index"
           >
             <b>{{ item }}</b>
-          </v-tab>
-        </v-tabs>
+          </v-btn>
+        </div>
 
         <v-tabs-items v-model="tab">
           <v-tab-item :transition="false">
@@ -56,38 +68,43 @@
               color="basil"
               flat
             >
-              <v-card-text>
-                <div v-if="companyProducts && companyProducts.length !== 0" class="product-items">
-                  <div class="product-item" @click="$router.push('/create-product')">
-                    <div class="product-item-image" style="background: rgba(40, 167, 69, 0.5)">
-                      <v-icon style="font-size: 80px;color: #316a05">
-                        mdi-plus
-                      </v-icon>
+              <div>
+                <div v-if="companyProducts && companyProducts.length !== 0" class="company-products">
+                  <div style="display: flex;flex-direction: column;align-items: center;justify-content: center;" class="custom-card-product custom-card" @click="$router.push('/create-product')">
+                    <div style="display: flex;justify-content: center;">
+                        <v-icon style="font-size: 140px;color: #316a05">
+                          mdi-plus
+                        </v-icon>
                     </div>
-                    <div style="color: rgb(40, 167, 69)" class="text-center">
-                      <b>Upload Product</b>
+                    <div class="info-zone">
+                        <div style="color: rgb(40, 167, 69)" class="text-center">
+                          <b>Upload Product</b>
+                        </div>
                     </div>
                   </div>
-                  <div v-for="(item, index) in companyProducts" :key="index" class="product-item" @click="$router.push('/product/' + item.productID)">
-                    <div class="product-item-image">
-                      <img src="~/assets/image/tomato.png" alt="">
+                  <custom-card-product
+                      v-for="(item, index) in companyProducts"
+                      :key="index"
+                      :item="item"
+                      :type="'about'"
+                      :current-address="currentAddress"
+                    />
+                </div>
+                <div v-else>
+                  <div style="display: flex;flex-direction: column;align-items: center;justify-content: center;" class="custom-card-product custom-card" @click="$router.push('/create-product')">
+                    <div style="display: flex;justify-content: center;">
+                        <v-icon style="font-size: 140px;color: #316a05">
+                          mdi-plus
+                        </v-icon>
                     </div>
-                    <b>{{ item.productName }}</b>
+                    <div class="info-zone">
+                        <div style="color: rgb(40, 167, 69)" class="text-center">
+                          <b>Upload Product</b>
+                        </div>
+                    </div>
                   </div>
                 </div>
-                <div v-else class="d-flex flex-column align-center justify-center">
-                  <div class="product-item" @click="$router.push('/create-product')">
-                    <div class="product-item-image" style="background: rgba(40, 167, 69, 0.5)">
-                      <v-icon style="font-size: 80px;color: #316a05">
-                        mdi-plus
-                      </v-icon>
-                    </div>
-                    <div style="color: rgb(40, 167, 69)" class="text-center">
-                      <b>Upload Product</b>
-                    </div>
-                  </div>
-                </div>
-              </v-card-text>
+              </div>
             </v-card>
           </v-tab-item>
           <v-tab-item :transition="false">
@@ -147,14 +164,17 @@
 import { mapGetters, mapActions } from 'vuex'
 import axios from 'axios'
 import * as CompanyContract from '~/blockchain/utils/CompanyContract'
+import CustomCardProduct from '../common/CustomCardProduct.vue'
+import Banner from '../homepage/Banner.vue'
 export default {
+  components: { CustomCardProduct, Banner },
   data: () => ({
     valid: true,
     companyAddress: '',
     email: '',
     phone: '',
     company: '',
-    tab: null,
+    tab: 0,
     items: [
       'Products', 'License', 'Affiliated Factory', 'Member'
     ],
@@ -168,7 +188,10 @@ export default {
       'currentCompany',
       'companyInfo',
       'companyProducts'
-    ])
+    ]),
+    getUrlRandom () {
+      return require(`~/assets/image/product/${this.randomNumber()}.svg`)
+    }
   },
   mounted () {
     if (this.currentAddress) {
@@ -181,6 +204,11 @@ export default {
       'changeCompanyInfo',
       'changeCompanyProduct'
     ]),
+    randomNumber () {
+      const max = 6;
+      const min = 1;
+      return Math.floor(Math.random() * (max - min + 1) + min)
+    },
     convertData (data) {
       const dataX = []
       for (const key in data) {
@@ -222,60 +250,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.basil {
-  background-color: transparent !important;
-  box-shadow: unset !important;
-  // text-align: center;
-}
-.basil--text {
-  color: #356859 !important;
-}
-.title-zone > div {
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-.title-zone span {
-  color: #2289e3;
-  font-weight: bold;
-}
-.product-items {
-  display: flex;
-  flex-wrap: wrap;
-}
-.product-item {
-  cursor: pointer;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  margin-right: 10px;
-}
-.product-item-image {
-  width: 150px;
-  height: 150px;
-  border-radius: 6px;
-  background: rgb(53 104 89 / 30%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-.company-zone {
-  display: flex;
-}
-.company-image {
-  display: inline-block;
-  padding: 80px;
-  background: rgb(242, 242, 242);
-  margin-right: 50px;
-}
-@media screen and (max-width: 960px) {
-  .company-zone {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .company-image {
-    margin-right: 0;
-  }
-}
+@import '~/assets/scss/components/company.scss';
 </style>
+

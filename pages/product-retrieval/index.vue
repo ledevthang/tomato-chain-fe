@@ -1,22 +1,36 @@
 <template>
   <v-container>
     <div class="products page">
-      <qrcode-stream @decode="onDecode" @init="onInit" />
+      <div style="display: flex;justify-content: space-between;align-items: center" class="hidden-sm-and-down">
+        <div style="width: 50%">
+          <img src="https://cdn-wordpress-info.futurelearn.com/info/wp-content/uploads/e406b9f1-a89c-4a74-a15d-52d825ef6760.png" alt="">
+        </div>
+        <qrcode-drop-zone @detect="onDetect" @dragover="onDragOver" @init="logErrors">
+          <div class="drop-area" :class="{ 'dragover': dragover }">
+            DROP QR IMAGE HERE TO SEE PRODUCT INFORMATION
+          </div>
+        </qrcode-drop-zone>
+      </div>
+      <div class="hidden-md-and-up">
+        <qrcode-stream @decode="onDecode" @init="onInit" />
+      </div>
     </div>
   </v-container>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { QrcodeStream } from 'vue-qrcode-reader'
+import { QrcodeStream, QrcodeDropZone } from 'vue-qrcode-reader'
 export default {
   components: {
-    QrcodeStream
+    QrcodeStream,
+    QrcodeDropZone
   },
   data () {
     return {
       result: '',
-      error: ''
+      error: '',
+      dragover: false
     }
   },
   computed: {
@@ -27,7 +41,11 @@ export default {
   watch: {
     result (newVal) {
       if (newVal) {
-        window.location.href(newVal)
+        const index = newVal.indexOf('/product/')
+        const result = newVal.slice(index, newVal.length)
+        console.log(index, newVal.length)
+        this.$router.push(result)
+        // window.location.replace(result)
       }
     }
   },
@@ -40,6 +58,29 @@ export default {
     ...mapActions('companyStore', [
       'changeTriggerUpdate'
     ]),
+    logErrors (promise) {
+      promise.catch(console.error)
+    },
+
+    onDragOver (isDraggingOver) {
+      this.dragover = isDraggingOver
+    },
+    async onDetect (promise) {
+      try {
+        const { content } = await promise
+
+        this.result = content
+        this.error = null
+      } catch (error) {
+        if (error.name === 'DropImageFetchError') {
+          this.error = 'Sorry, you can\'t load cross-origin images :/'
+        } else if (error.name === 'DropImageDecodeError') {
+          this.error = 'Ok, that\'s not an image. That can\'t be decoded.'
+        } else {
+          this.error = 'Ups, what kind of error is this?! ' + error.message
+        }
+      }
+    },
     onDecode (result) {
       this.result = result
     },
@@ -70,6 +111,26 @@ export default {
   }
 }
 </script>
-<style
-    Company lang="sass" scoped>
+<style lang="scss" scoped>
+.drop-area {
+  width: 400px;
+  height: 400px;
+  color: #000;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #DEF9EC;
+}
+
+.dragover {
+  background-color: rgba(0,0,0,.8);
+}
+
+.drop-error {
+  color: red;
+  font-weight: bold;
+}
 </style>

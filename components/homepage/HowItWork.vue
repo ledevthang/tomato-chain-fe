@@ -1,5 +1,5 @@
 <template>
-  <div id="about" style="background: #dcede4 !important" class="about ebet-element">
+  <div id="about" class="about ebet-element">
     <v-container class="about-content">
       <div class="ebet-element__caption">
         <div class="ebet-element__caption-text">
@@ -8,25 +8,26 @@
       </div>
       <div class="ebet-element__content">
         <div class="about-description">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+          There are numerous firms providing the same or similar set of products/services and this has given rise.
         </div>
         <div class="about-features">
-          <div v-for="(item, index) in aboutFeature" :key="index" class="about-feature">
-            <img :src="require(`~/assets/image/not-found-image.svg`)" alt="">
-            <div>
-              <b>{{ item.name }}</b>
-            </div>
-            <div class="about-feature__description">
-              {{ item.description }}
-            </div>
-          </div>
+          <custom-card-product
+            v-for="(item, index) in allProduct.slice(0, 6)"
+            :key="index"
+            :item="item"
+            :type="'about'"
+            :current-address="currentAddress"
+          />
         </div>
       </div>
     </v-container>
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+import CustomCardProduct from '../common/CustomCardProduct.vue'
 export default {
+  components: { CustomCardProduct },
   data () {
     return {
       aboutFeature: [
@@ -74,6 +75,16 @@ export default {
         }
       ]
     }
+  },
+  computed: {
+    ...mapGetters('walletStore', [
+      'currentAddress'
+    ]),
+    ...mapGetters('companyStore', [
+      'allCompany',
+      'companyInfo',
+      'allProduct'
+    ])
   }
 }
 </script>

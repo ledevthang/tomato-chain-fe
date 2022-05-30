@@ -10,3 +10,17 @@
   font-style: normal;
   src: url('~/static/fonts/Montserrat/Montserrat-Bold.ttf') format('truetype');
 }
+
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-style: normal;
+  src: url('~/static/fonts/Poppins/Poppins-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Poppins-SemiBold';
+  font-weight: 500;
+  font-style: normal;
+  src: url('~/static/fonts/Poppins/Poppins-SemiBold.ttf') format('truetype');
+}

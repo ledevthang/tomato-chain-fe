@@ -10,7 +10,7 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - For the traceability of your products from origin to final consumer',
-    title: 'Tomato Chain',
+    title: 'TomatoCheck',
     htmlAttrs: {
       lang: 'en'
     },

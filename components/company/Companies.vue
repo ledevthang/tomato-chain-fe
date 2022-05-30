@@ -1,91 +1,32 @@
 <template>
-  <div class="company">
-    <div class="title">Companies</div>
-    <div v-if="allCompany" class="card-company">
-      <v-card
-        v-for="(item, index) in allCompany"
-        :key="index"
-        :loading="loading"
-        class="mr-3 my-12 text-center custom-card"
-        max-width="274"
-      >
-        <template slot="progress">
-          <v-progress-linear
-            color="deep-purple"
-            height="10"
-            indeterminate
-          />
-        </template>
-
-        <img height="130" class="mt-3" src="~/assets/image/company.png">
-
-        <v-card-title>{{ item.companyName }}</v-card-title>
-
-        <v-card-text>
-          <v-row
-            align="center"
-            class="mx-0"
-          >
-            <v-rating
-              :value="0"
-              color="amber"
-              dense
-              half-increments
-              readonly
-              size="14"
-            />
-
-            <div class="grey--text ms-4">
-              0 (0)
-            </div>
-          </v-row>
-
-          <div class="mt-4 text-left text-subtitle-1">
-            {{ item.companyType }}
-          </div>
-        </v-card-text>
-
-        <v-divider class="mx-4"/>
-
-        <v-card-text>
-          <v-chip-group
-            v-model="selection"
-            active-class="#DEF9EC accent-4 black--text"
-            column
-          >
-            <v-chip>Total Product: {{ totalProduct(item.companyName) }}</v-chip>
-            <v-chip>Phone Number: {{ item.companyPhoneNumber }}</v-chip>
-
-            <v-chip>Email: {{ item.companyEmail }}</v-chip>
-          </v-chip-group>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn
-            class="custom-btn-green"
-            dense
-            @click="$router.push('/company/' + item.companyID)"
-          >
-            <b>
-              See details
-            </b>
-            <v-icon class="ml-1">
-              mdi-arrow-right-bold-circle
-            </v-icon>
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </div>
-  </div>
+  <div class="company py-16 bg-primary">
+    <v-container>
+      <div class="title-text">Companies</div>
+      <div class="title-text-below">There are numerous firms providing the same or similar set of products/services and this has given rise to a need - the need to be different. In our commitment to deliver top notch services to our clients, we measure every delivery step down to the minutest details. We take pride in sharing with you, a few of our differentiators.</div>
+      <div v-if="allCompany" class="company-zone card-company">
+        <custom-card-avatar
+          v-for="(item, index) in allCompany"
+          :key="index"
+          :item="item"
+          :current-address="currentAddress"
+          :total-product="totalProduct(item.companyName)"
+          class="custom-card"
+        />
+      </div>
+    </v-container>
+      </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
-// import * as CompanyContract from '~/blockchain/utils/CompanyContract'
+import CustomCardAvatar from '~/components/common/CustomCardAvatar.vue'
 export default {
   data: () => ({
     loading: false,
     selection: 1
   }),
+  components: {
+    CustomCardAvatar
+  },
   computed: {
     ...mapGetters('walletStore', [
       'currentAddress'
@@ -103,7 +44,6 @@ export default {
       setTimeout(() => (this.loading = false), 2000)
     },
     totalProduct (companyName) {
-      // console.log(companyAddress, 'companyAddress')
       if (this.allProduct) {
         return this.allProduct.filter((item) => item.companyName === companyName).length
       }

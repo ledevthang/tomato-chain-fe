@@ -8,13 +8,15 @@ import { initWeb3 } from '~/blockchain/utils/support/initWeb3'
 const supportUpdateStore = async (context, transactions) => {
   const isCompany = await CompanyContract.isCompany(walletManager.currentAddress())
   const address = walletManager.currentAddress()
+  const balances = await walletManager.getBalances()
+  console.log(balances, 'balancesbalances')
   const params = {
     isCompany: isCompany.tx.data,
     address
   }
   context.store.dispatch('walletStore/changeCurrentAddress', walletManager.currentAddress())
   context.store.dispatch('companyStore/changeCurrentCompany', params)
-  context.store.dispatch('walletStore/changeSupportTokenAndBalance', walletManager.tokens())
+  context.store.dispatch('walletStore/changeSupportTokenAndBalance', balances)
 }
 const checkNetWork = async () => {
   // const network = await walletManager.getCurrentNetwork()

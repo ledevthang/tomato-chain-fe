@@ -1,76 +1,60 @@
 <template>
-  <div class="company">
-    <div class="title">Products</div>
+  <div class="company py-16">
+    <v-container>
+      <div class="title-text">Products</div>
+      <div class="title-text-below">
+        There are numerous firms providing the same or similar set of products/services and this has given rise to a need - the need to be different. In our commitment to deliver top notch services to our clients.
+      </div>
     <div v-if="allProduct" class="card-company">
-      <!-- <div v-for="(item, index) in allProduct" :key="index">
-        {{ item.productName }}
-      </div> -->
       <v-card
         v-for="(item, index) in allProduct"
         :key="index"
         :loading="loading"
-        class="mr-3 my-12 text-center custom-card"
-        max-width="274"
+        class="text-center custom-card"
       >
-        <template slot="progress">
-          <v-progress-linear
-            color="deep-purple"
-            height="10"
-            indeterminate
-          />
-        </template>
+        <div v-if="item.Provider === currentAddress" class="custom-badges">
+          <span class="custom-badges__content">
+            My product
+          </span>
+        </div>
 
-        <img height="130" class="mt-3" src="~/assets/image/tomato.png">
+        <img height="110" class="mt-10" src="~/assets/image/tomato.png">
 
-        <v-card-title>{{ item.productName }}</v-card-title>
+        <v-card-title class="card-title">{{ item.productName }}</v-card-title>
 
         <v-card-text>
           <v-row
             align="center"
-            class="mx-0"
+            class="rate-zone"
           >
             <v-rating
-              :value="0"
-              color="amber"
-              dense
-              half-increments
-              readonly
-              size="14"
-            />
+                :value="0"
+                background-color="#d6d6d6"
+                color="yellow"
+                dense
+                half-increments
+                size="20"
+              />
 
             <div class="grey--text ms-4">
               0 (0)
             </div>
           </v-row>
-
-          <!-- <div class="mt-4 text-left text-subtitle-1">
-            $ • Italian, Vegetable
-          </div> -->
         </v-card-text>
-
-        <v-divider class="mx-4"/>
-
-        <v-card-text>
-          <v-chip-group
-            v-model="selection"
-            active-class="#DEF9EC accent-4 black--text"
-            column
-          >
-            <!-- <v-chip>Product Price: ${{ item.productPrice }}</v-chip>
-
-            <v-chip>Date Of Manufacture: {{ item.dateOfManufacture }}</v-chip>
-
-            <v-chip>Expiration Date: {{ item.expirationDate }}</v-chip>-->
-
-            <v-chip>Provider: {{ item.companyName }}</v-chip>
-            <v-chip>ID: TMT{{ item.productID }}</v-chip>
-          </v-chip-group>
+        <v-card-text class="card-text-content">
+          <div class="des-row">
+              <span>Provider</span>
+              <div>{{ item.companyName }}</div>
+            </div>
+            <div class="des-row">
+              <span>ID</span>
+              <div>TMT{{ item.productID }}</div>
+            </div>
         </v-card-text>
-        <v-card-actions>
-          <!-- @click.stop="goToLink(item.Provider)" -->
-          <v-spacer />
+        <v-card-actions class="d-flex justify-center">
           <v-btn
             class="custom-btn-green"
+            rounded
             dense
             @click="$router.push('/product/' + item.productID)"
           >
@@ -84,11 +68,11 @@
         </v-card-actions>
       </v-card>
     </div>
+    </v-container>
   </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
-// import * as CompanyContract from '~/blockchain/utils/CompanyContract'
 export default {
   data: () => ({
     loading: false,

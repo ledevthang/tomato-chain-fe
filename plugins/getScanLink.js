@@ -1,16 +1,11 @@
 export default (context, inject) => {
   const getScanLink = (link, type) => {
-    const network = process.env.NETWORK
+    console.log(link, type)
     if (type === 'address') {
-      return network === 'TESTNET'
-        ? `https://ropsten.etherscan.io/address/${link}`
-        : `https://ropsten.etherscan.io/tx/${link}`
+      return `https://ropsten.etherscan.io/address/${link}`
+    } else {
+      return `https://ropsten.etherscan.io/tx/${link}`
     }
-    // else {
-    //   return network === 'TESTNET'
-    //     ? `https://testnet.bscscan.com/tx/${link}`
-    //     : `https://bscscan.com/tx/${link}`
-    // }
   }
 
   // Inject $convertTime(item) in Vue, context, and store

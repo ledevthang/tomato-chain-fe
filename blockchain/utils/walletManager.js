@@ -121,8 +121,8 @@ async function getBalances () {
   try {
     const web3 = new Web3(new Web3.providers.HttpProvider('https://eth-ropsten.alchemyapi.io/v2/gu1DWdYJJ3RyJgdeMocUjxi0miOAzt1t'))
     const userBalance = await web3.eth.getBalance(currentAddress)
-    console.log(currentAddress, userBalance / 10 ** 18, 'userBalanceuserBalance')
-    return userBalance
+    return Math.floor(BigNumber(userBalance)
+    .dividedBy(10 ** 18))
   } catch (error) {
     throw new WalletError.NewUnknowError('can not get balances now')
   }

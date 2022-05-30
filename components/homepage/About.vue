@@ -3,34 +3,33 @@
     <v-container class="about-content">
       <div class="ebet-element__caption">
         <div class="ebet-element__caption-text">
-          <span>top 4 companies</span>
+          <span>top 3 companies</span>
         </div>
-        <!-- <div class="underlined">
-          <hr>
-          <hr>
-        </div> -->
       </div>
       <div class="ebet-element__content">
         <div class="about-description">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+          There are numerous firms providing the same or similar set of products/services and this has given rise to a need - the need to be different. In our commitment to deliver top notch services to our clients, we measure every delivery step down to the minutest details. We take pride in sharing with you, a few of our differentiators.
         </div>
-        <div class="about-features">
-          <div v-for="(item, index) in aboutFeature" :key="index" class="about-feature">
-            <img :src="require(`~/assets/image/${item.image}`)" alt="">
-            <div>
-              <b>{{ item.name }}</b>
-            </div>
-            <div class="about-feature__description">
-              {{ item.description }}
-            </div>
-          </div>
+        <div v-if="allCompany" class="about-features">
+          <custom-card-avatar
+            v-for="(item, index) in allCompany.slice(0, 3)"
+            :key="index"
+            :item="item"
+            :type="'about'"
+            :current-address="currentAddress"
+            :total-product="totalProduct(item.companyName)"
+            class="custom-card"
+          />
         </div>
       </div>
     </v-container>
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+import CustomCardAvatar from '../common/CustomCardAvatar.vue'
 export default {
+  components: { CustomCardAvatar },
   data () {
     return {
       aboutFeature: [
@@ -77,6 +76,23 @@ export default {
           image: 'company.png'
         }
       ]
+    }
+  },
+  computed: {
+    ...mapGetters('walletStore', [
+      'currentAddress'
+    ]),
+    ...mapGetters('companyStore', [
+      'allCompany',
+      'companyInfo',
+      'allProduct'
+    ])
+  },
+  methods: {
+    totalProduct (companyName) {
+      if (this.allProduct) {
+        return this.allProduct.filter((item) => item.companyName === companyName).length
+      }
     }
   }
 }

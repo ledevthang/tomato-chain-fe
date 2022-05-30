@@ -91,7 +91,10 @@
           </div>
           <v-card-actions style="flex-direction: column">
             <div style="width: 100%" class="text-zone d-flex align-center justify-center">
-              <b>0.0001</b> <img style="width: 25px;height: 25px" class="ml-3" src="~/assets/image/coin/ETH.png" alt="">
+              <b>0.0001</b> <img style="width: 25px;height: 25px" class="ml-1" src="~/assets/image/coin/ETH.png" alt="">
+            </div>
+            <div style="width: 100%" class="text-zone d-flex align-center justify-center mt-3">
+              Your balances: <b class="ml-2">{{ supportTokenAndBalance }}</b> <img style="width: 25px;height: 25px" class="ml-1" src="~/assets/image/coin/ETH.png" alt="">
             </div>
             <v-spacer />
             <div style="margin: 20px 0;width: 100%;display: flex;justify-content: space-between;" class="action-zone">
@@ -181,7 +184,8 @@ export default {
   }),
   computed: {
     ...mapGetters('walletStore', [
-      'currentAddress'
+      'currentAddress',
+      'supportTokenAndBalance'
     ]),
     ...mapGetters('companyStore', [
       'currentCompany',

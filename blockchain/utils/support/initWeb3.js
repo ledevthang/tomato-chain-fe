@@ -9,7 +9,7 @@ export const initWeb3 = async () => {
     const isConnected = await window.ethereum._metamask.isUnlocked()
     // console.log(isConnected)
     if (isConnected) {
-      await window.ethereum.enable()
+      await window.ethereum.request({ method: 'eth_requestAccounts' })
     }
   }
   web3 = new Web3(_get(window, 'web3.currentProvider'))
