@@ -496,6 +496,9 @@ button {
       margin-bottom: 2px;
       font-weight: 600;
   }
+  @media screen and (max-width: 599px) {
+    margin-top: 10px;
+  }
 }
 a {
   color: #2590d2!important;

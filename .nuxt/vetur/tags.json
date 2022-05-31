@@ -1,10 +1,4 @@
 {
-  "CompanyCompanies": {
-    "description": "Auto imported from components/company/Companies.vue"
-  },
-  "Company": {
-    "description": "Auto imported from components/company/Company.vue"
-  },
   "CommonChooseWallet": {
     "description": "Auto imported from components/common/ChooseWallet.vue"
   },
@@ -13,6 +7,18 @@
   },
   "CommonCustomCardProduct": {
     "description": "Auto imported from components/common/CustomCardProduct.vue"
+  },
+  "ProductsCreateProduct": {
+    "description": "Auto imported from components/products/CreateProduct.vue"
+  },
+  "Products": {
+    "description": "Auto imported from components/products/Products.vue"
+  },
+  "CompanyCompanies": {
+    "description": "Auto imported from components/company/Companies.vue"
+  },
+  "Company": {
+    "description": "Auto imported from components/company/Company.vue"
   },
   "HomepageAbout": {
     "description": "Auto imported from components/homepage/About.vue"
@@ -25,12 +31,6 @@
   },
   "HomepageMatches": {
     "description": "Auto imported from components/homepage/Matches.vue"
-  },
-  "ProductsCreateProduct": {
-    "description": "Auto imported from components/products/CreateProduct.vue"
-  },
-  "Products": {
-    "description": "Auto imported from components/products/Products.vue"
   },
   "RegisterForm": {
     "description": "Auto imported from components/register/RegisterForm.vue"
