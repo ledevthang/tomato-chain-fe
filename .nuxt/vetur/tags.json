@@ -11,6 +11,12 @@
   "RegisterForm": {
     "description": "Auto imported from components/register/RegisterForm.vue"
   },
+  "CompanyCompanies": {
+    "description": "Auto imported from components/company/Companies.vue"
+  },
+  "Company": {
+    "description": "Auto imported from components/company/Company.vue"
+  },
   "HomepageAbout": {
     "description": "Auto imported from components/homepage/About.vue"
   },
@@ -22,12 +28,6 @@
   },
   "HomepageMatches": {
     "description": "Auto imported from components/homepage/Matches.vue"
-  },
-  "CompanyCompanies": {
-    "description": "Auto imported from components/company/Companies.vue"
-  },
-  "Company": {
-    "description": "Auto imported from components/company/Company.vue"
   },
   "ProductsCreateProduct": {
     "description": "Auto imported from components/products/CreateProduct.vue"
